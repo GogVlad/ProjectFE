@@ -1,5 +1,5 @@
 <template>
-  <div class="container col-8">
+  <div class="container col-6">
     <h2 class="mb-5">Login</h2>
     <form @submit.prevent="handleSubmit">
       <div class="form-group">
