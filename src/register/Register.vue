@@ -7,7 +7,7 @@
         <input
           type="text"
           v-model="user.firstName"
-          v-validate="'required'"
+          v-validate="{ required: true, alpha: true }"
           name="firstName"
           class="form-control"
           :class="{ 'is-invalid': submitted && errors.has('firstName') }"
@@ -24,7 +24,7 @@
         <input
           type="text"
           v-model="user.lastName"
-          v-validate="'required'"
+          v-validate="{ required: true, alpha: true }"
           name="lastName"
           class="form-control"
           :class="{ 'is-invalid': submitted && errors.has('lastName') }"
@@ -41,7 +41,7 @@
         <input
           type="text"
           v-model="user.username"
-          v-validate="'required'"
+          v-validate="{ required: true, email: true }"
           name="username"
           class="form-control"
           :class="{ 'is-invalid': submitted && errors.has('username') }"
@@ -58,7 +58,7 @@
         <input
           type="password"
           v-model="user.password"
-          v-validate="{ required: true, min: 6 }"
+          v-validate="'required|min:8|number|upCase'"
           name="password"
           class="form-control"
           :class="{ 'is-invalid': submitted && errors.has('password') }"
@@ -92,6 +92,16 @@ export default {
       },
       submitted: false,
     };
+  },
+  created() {
+    this.$validator.extend("upCase", {
+      getMessage: () => "One uppercase character",
+      validate: (value) => value.match(/[A-Z]/g) !== null,
+    });
+    this.$validator.extend("number", {
+      getMessage: () => "One number",
+      validate: (value) => value.match(/[0-9]/g) !== null,
+    });
   },
 };
 </script>
