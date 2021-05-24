@@ -1,5 +1,5 @@
 <template>
-  <div class="container col-10 bg-secondary">
+  <div class="container col-10 bg-secondary text-dark">
     <div class="card text-center">
       <div class="card-header">Name's CV</div>
       <div class="card-body">
