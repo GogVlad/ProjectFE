@@ -74,7 +74,7 @@
         <button class="btn btn-primary">
           Register
         </button>
-        <router-link to="/register" class="btn btn-link">Cancel</router-link>
+        <router-link to="/login" class="btn btn-link">Cancel</router-link>
       </div>
     </form>
   </div>
