@@ -71,9 +71,7 @@
         </div>
       </div>
       <div class="form-group">
-        <button class="btn btn-primary">
-          Register
-        </button>
+        <button class="btn btn-primary">Register</button>
         <router-link to="/register" class="btn btn-link">Cancel</router-link>
       </div>
     </form>
@@ -81,6 +79,7 @@
 </template>
 
 <script>
+var id = 0;
 export default {
   data() {
     return {
@@ -102,6 +101,24 @@ export default {
       getMessage: () => "One number",
       validate: (value) => value.match(/[0-9]/g) !== null,
     });
+  },
+  methods: {
+    handleSubmit() {
+      //TODO: validate before
+
+      if (localStorage.getItem("currentId") === null) {
+        window.localStorage.setItem("currentId", id);
+      } else {
+        id = localStorage.getItem("currentId");
+      }
+
+      console.log(this.user);
+      var registeredUsers = [];
+      registeredUsers[id] = JSON.stringify(this.user);
+      window.localStorage.setItem("users[" + [id] + "]", registeredUsers[id]);
+      id++;
+      window.localStorage.setItem("currentId", id);
+    },
   },
 };
 </script>
