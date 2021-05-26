@@ -1,7 +1,6 @@
 <template>
   <div class="container col-6">
     <h2>Register</h2>
-    <form @submit.prevent="handleSubmit">
       <div class="form-group">
         <label for="firstName">First Name</label>
         <input
@@ -71,37 +70,55 @@
         </div>
       </div>
       <div class="form-group">
-        <button class="btn btn-primary">
+        <button class="btn btn-primary" v-on:click="clickFunction()">
           Register
         </button>
         <router-link to="/login" class="btn btn-link">Cancel</router-link>
       </div>
-    </form>
   </div>
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   data() {
     return {
       user: {
         firstName: "",
+
         lastName: "",
+
         username: "",
+
         password: "",
       },
+
       submitted: false,
     };
   },
+
   created() {
     this.$validator.extend("upCase", {
       getMessage: () => "One uppercase character",
+
       validate: (value) => value.match(/[A-Z]/g) !== null,
     });
+
     this.$validator.extend("number", {
       getMessage: () => "One number",
+
       validate: (value) => value.match(/[0-9]/g) !== null,
     });
+  },
+
+  methods: {
+    clickFunction() {
+      
+     axios.get("http://192.168.1.101:8080/GetAllCars?")
+     .then(response => console.log(response))
+     .catch(error => console.log(error));
+    },
   },
 };
 </script>
