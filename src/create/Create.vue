@@ -52,7 +52,7 @@
               placeholder="Enter Title Here"
             />
           </div>
-          <div class="col-9  form-group">
+          <div class="col-9 form-group">
             <label for="description"></label>
             <input
               name="description[]"
@@ -66,7 +66,9 @@
       </div>
     </form>
     <div class="container col-6 m"></div>
-    <button type="submit" class="btn btn-success mt-5">Create CV</button>
+    <button type="button" @click="sendForm" class="btn btn-success mt-5">
+      Create CV
+    </button>
     <div class="container col-6">
       <button class="btn btn-sm btn-danger m-3">
         <router-link to="/home">Homepage</router-link>
@@ -93,9 +95,33 @@ export default {
       currentNumber++;
       this.applicants.push({});
     },
+    sendForm() {
+      var titles = this.createArrayFromInput(
+        document.getElementsByName("title[]")
+      );
+      var descriptions = this.createArrayFromInput(
+        document.getElementsByName("description[]")
+      );
+
+      var sections = {
+        titles: JSON.stringify(titles),
+        descriptions: JSON.stringify(descriptions),
+      };
+
+      console.log(sections);
+      //TODO: Send sections to API
+    },
     deleteForm(counter) {
       this.applicants.splice(counter, 1);
       currentNumber--;
+    },
+    createArrayFromInput(input) {
+      var k = [];
+      for (var i = 0; i < input.length; i++) {
+        var a = input[i];
+        k.push(a.value);
+      }
+      return k;
     },
   },
 };
